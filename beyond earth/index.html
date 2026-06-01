@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Earth</title>
+
+  <style>
+    @font-face {
+      font-family: 'Space Grotesk';
+      src: url('fontes/SpaceGrotesk-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Space Grotesk';
+      src: url('fontes/SpaceGrotesk-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Space Grotesk';
+      src: url('fontes/SpaceGrotesk-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('fontes/JetBrainsMonoNL-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('fontes/JetBrainsMonoNL-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fontes/Inter_18pt-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fontes/Inter_18pt-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fontes/Inter_18pt-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+  </style>
+
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #notif {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      margin: auto !important;
+      width: min(520px, calc(100vw - 48px)) !important;
+      height: fit-content !important;
+      z-index: 9000 !important;
+    }
+  </style>
+</head>
+<body>
+<video id="webcam" autoplay playsinline muted style="display:none;"></video>
+<div id="cursor"><span class="cur-tr"></span><span class="cur-bl"></span><span class="cur-dot"></span></div>
+
+
+<!-- intro -->
+<div class="screen active visible" id="intro">
+  <div class="stars-bg"></div>
+  <div class="pollution-overlay"></div>
+  <div class="intro-title-main">BEYOND EARTH</div>
+  <div class="intro-content">
+    <div class="pollution-words">
+      <span class="poll-word">Poluição extrema</span>
+      <span class="poll-word">Oceanos destruídos</span>
+      <span class="poll-word">Florestas desaparecidas</span>
+    </div>
+    <div class="earth-container">
+      <div class="earth-sphere"></div>
+      <div class="earth-smog"></div>
+    </div>
+    <div class="intro-title" id="introTitle"></div>
+    <button class="start-btn" id="startBtn">INICIAR EXPLORAÇÃO</button>
+  </div>
+</div>
+
+<!-- cockpit -->
+<div class="screen" id="cockpit-screen">
+  <div class="cockpit-wrapper">
+
+    <!-- espaço -->
+    <div class="space-bg"></div>
+    <div class="space-render" id="spaceRender"></div>
+    <div class="space-overlay"></div>
+    <div class="simple-interior" id="simpleInterior">
+      <canvas class="planet-canvas" id="planetCanvas"></canvas>
+      <div class="interior-overlay"></div>
+    </div>
+    <div class="space-stars" id="starField"></div>
+
+    <!-- estrelas -->
+    <div class="planet-particles" id="particleField"></div>
+
+    <!-- planeta -->
+    <div class="planet-display" id="planetDisplay">
+      <div class="planet-glow" id="planetGlow"></div>
+      <div class="planet-ring" id="planetRing"></div>
+      <div class="planet-sphere" id="planetSphere"></div>
+      <div class="planet-ring-front" id="planetRingFront"></div>
+    </div>
+
+    <div class="scan-line" id="scanLine"></div>
+    <div class="screen-fx" id="screenFx">
+      <div class="screen-fx-noise"></div>
+      <div class="screen-fx-bars"></div>
+    </div>
+
+    <!-- entrada/saída -->
+    <div class="warp-container" id="warpContainer"></div>
+    <div class="travel-flash" id="travelFlash"></div>
+    <div class="loading-bar" id="loadingBar"></div>
+
+    <!-- hud -->
+    <div class="cockpit-frame">
+      <div class="window-frame"></div>
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <div class="dashboard"></div>
+    </div>
+
+    <!-- elementos hud -->
+    <div class="hud-top" id="hudTop">
+      <div class="hud-planet-name" id="hudPlanetName">—</div>
+      <div class="hud-subtitle" id="hudSubtitle">SISTEMA DESCONHECIDO</div>
+    </div>
+
+    <div class="analysis-stack" id="analysisStack">
+      <div class="stats-panel" id="statsPanel">
+        <div class="stat-row" id="stat-temp">
+          <div class="stat-label"><span>TEMPERATURA</span><span class="stat-value" id="val-temp">—</span></div>
+          <div class="stat-bar"><div class="stat-fill" id="bar-temp"></div></div>
+        </div>
+        <div class="stat-row" id="stat-o2">
+          <div class="stat-label"><span>OXIGÉNIO</span><span class="stat-value" id="val-o2">—</span></div>
+          <div class="stat-bar"><div class="stat-fill" id="bar-o2"></div></div>
+        </div>
+        <div class="stat-row" id="stat-press">
+          <div class="stat-label"><span>PRESSÃO</span><span class="stat-value" id="val-press">—</span></div>
+          <div class="stat-bar"><div class="stat-fill" id="bar-press"></div></div>
+        </div>
+        <div class="stat-row" id="stat-water">
+          <div class="stat-label"><span>ÁGUA</span><span class="stat-value" id="val-water">—</span></div>
+          <div class="stat-bar"><div class="stat-fill" id="bar-water"></div></div>
+        </div>
+        <div class="stat-row" id="stat-grav">
+          <div class="stat-label"><span>GRAVIDADE</span><span class="stat-value" id="val-grav">—</span></div>
+          <div class="stat-bar"><div class="stat-fill" id="bar-grav"></div></div>
+        </div>
+        <div class="stat-row" id="stat-rad">
+          <div class="stat-label"><span>RADIAÇÃO</span><span class="stat-value" id="val-rad">—</span></div>
+          <div class="stat-bar"><div class="stat-fill" id="bar-rad"></div></div>
+        </div>
+        <div class="habit-verdict" id="habitVerdict"></div>
+      </div>
+      <div class="planet-interior-warning" id="planetInteriorWarning"></div>
+    </div>
+
+    <div class="status-messages" id="statusMessages"></div>
+
+    <div class="habit-meter" id="habitMeter">
+      <div class="habit-label">HABITABILIDADE</div>
+      <div class="habit-bar"><div class="habit-fill" id="habitFill"></div></div>
+      <div class="habit-value" id="habitValue">0%</div>
+      <div class="habit-status" id="habitStatus">INABITÁVEL</div>
+    </div>
+
+    <div class="distance-badge" id="distanceBadge">
+      <div class="dist-label">DISTÂNCIA</div>
+      <div class="dist-value" id="distValue">—</div>
+    </div>
+
+    <!-- combustível -->
+    <div class="fuel-panel" id="fuelPanel">
+      <div class="fuel-label" id="fuelLabel">COMBUSTÍVEL</div>
+      <div class="fuel-gauge" aria-label="Combustível">
+        <svg class="fuel-ring" viewBox="0 0 128 128" aria-hidden="true">
+          <circle class="fuel-ring-bg" cx="64" cy="64" r="52"></circle>
+          <circle class="fuel-ring-soft" cx="64" cy="64" r="44"></circle>
+          <circle class="fuel-fill" id="fuelFill" cx="64" cy="64" r="52"></circle>
+        </svg>
+        <div class="fuel-value" id="fuelValue">100%</div>
+      </div>
+    </div>
+
+    <div class="planet-desc" id="planetDescEl">
+      <div class="planet-desc-title" id="planetDescTitle"></div>
+      <div class="planet-desc-text" id="planetDescText"></div>
+    </div>
+
+    <div class="nav-controls">
+      <button class="nav-btn exit-btn is-hidden" id="exitBtn" disabled>REGRESSAR À ÓRBITA</button>
+      <button class="nav-btn" id="nextBtn">PROCURAR OUTRO PLANETA</button>
+    </div>
+
+    <!-- aviso comb baixo -->
+    <div class="fuel-alarm" id="fuelAlarm">
+      <div class="fuel-alarm-title">COMBUSTÍVEL ESGOTADO</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ecrã final -->
+<div class="screen" id="final-screen">
+  <div class="stars-bg"></div>
+  <div class="final-content">
+    <div class="final-earth" id="finalEarth"></div>
+    <div class="final-big" id="finalBig">NÃO CONSEGUIMOS ALCANÇAR OUTRO PLANETA.</div>
+    <button class="restart-btn" id="restartBtn">RECOMEÇAR</button>
+  </div>
+</div>
+
+<div id="planet-dive-overlay"></div>
+<div class="notif" id="notif"></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.min.js"></script>
+<button id="fullscreenBtn" title="Ecrã inteiro">
+  <svg id="fsIconExpand" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+  <svg id="fsIconCompress" viewBox="0 0 24 24" style="display:none"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
+</button>
+
+<script src="audio.js"></script>
+<script src="media.js"></script>
+<script src="planetas.js"></script>
+<script src="planeta-gelo.js"></script>
+<script src="planeta-lava.js"></script>
+<script src="planeta-oceano.js"></script>
+<script src="planeta-deserto.js"></script>
+<script src="planeta-radiacao.js"></script>
+<script src="planeta-baixagrav.js"></script>
+<script src="gestor-cenas.js"></script>
+<script src="cena-espaco.js"></script>
+<script src="interface.js"></script>
+
+</body>
+</html>

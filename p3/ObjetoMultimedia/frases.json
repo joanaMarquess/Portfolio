@@ -1,0 +1,31 @@
+{
+  "startOverlay": "Go full screen to start. Interact with objects and text to improve your experience",
+  "smallScreen": "This website cannot be viewed at this screen size. Please use a larger display.",
+  "introLine": "Mary Maloney was waiting for her husband to come home from work.",
+  "listenLine": "“Listen,” he said, “I’ve got something to tell you.”",
+  "hoverGrow": "At that point, Mary Maloney simply walked up behind him and without any pause she swung the big frozen leg of lamb",
+  "blurIntro": "All right, she told herself. So I've killed him",
+  "thoughts": {
+    "1": "He didn’t deserve this…",
+    "2": "But what else could I do?",
+    "3": "Stay calm, Mary. Stay calm.",
+    "4": "Keep your voice steady.",
+    "5": "Hide the trembling hands.",
+    "6": "They can’t suspect a thing.",
+    "7": "Remember your story.",
+    "8": "Smile, don’t shake.",
+    "9": "The oven will cover it.",
+    "10": "Serve it before it cools.",
+    "11": "Keep breathing. Keep smiling.",
+    "12": "Hide the lamb. Hide the truth.",
+    "13": "Footsteps—are they closer?",
+    "14": "Smile wider, breathe slower.",
+    "15": "Keep talking. Keep talking."
+  },
+  "meatMelt": "She carried the meat into the kitchen, placed it in a pan, turned the oven on high, and shoved it inside.",
+  "flickerText": "It wasn’t six o’clock yet and the lights were still on in the grocery shop.",
+  "deadParagraph": "“Quick! Come quick! Patrick’s dead!” “Who’s speaking?” “Mrs Maloney. Mrs Patrick Maloney.”",
+  "circleText": "“Is he dead?” she cried. “I’m afraid he is. What happened?”",
+  "lambInvite": "Why don’t you eat up that lamb that’s in the oven? It’ll be cooked just right by now.”",
+  "giggleText": "And in the other room, Mary Maloney began to giggle."
+}

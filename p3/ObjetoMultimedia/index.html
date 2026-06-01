@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamb to the Slaughter - Conto Interativo</title>
+    <link rel="stylesheet" href="index.css?v=5">
+
+
+</head>
+<body>
+<button class="fullscreen-toggle" type="button" aria-pressed="false" aria-label="Entrar em ecrã cheio" title="Ecrã cheio">
+    <svg class="fullscreen-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 9V3h6v2H5v4H3zm12-6h6v6h-2V5h-4V3zm6 12v6h-6v-2h4v-4h2zM9 21H3v-6h2v4h4v2z" fill="currentColor"/>
+    </svg>
+</button>
+<div class="fullscreen-corner-hint" aria-hidden="true">↗</div>
+<div class="start-overlay" role="dialog" aria-live="polite">
+    <div class="start-overlay__content">
+        <span class="start-overlay__icon" aria-hidden="true">
+            <svg class="fullscreen-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M3 9V3h6v2H5v4H3zm12-6h6v6h-2V5h-4V3zm6 12v6h-6v-2h4v-4h2zM9 21H3v-6h2v4h4v2z" fill="currentColor"/>
+            </svg>
+        </span>
+        <p class="start-overlay__text"></p>
+    </div>
+</div>
+<div class="small-screen-block" role="alert" aria-live="assertive">
+    <div class="small-screen-block__content">
+        <p class="small-screen-message"></p>
+    </div>
+</div>
+<div class="viewport">
+    <div class="diagonal-track">
+
+        <section class="scene scene-text-block scene-title">
+            <video id="tituloVideo" src="videos/titulo.mp4" muted playsinline></video>
+            <div class="scroll-hint" aria-hidden="true">&darr;</div>
+        </section>
+
+        <section class="scene scene-text-block scene-intro-text">
+            <p class="intro-line"></p>
+        </section>
+
+        <section class="scene scene-full-media scene-gif-intro">
+
+            
+            <video class="scene-gif-intro__media base-gif"
+                   src="videos/cena1.1.MP4"
+                   autoplay
+                   muted
+                   playsinline
+                   loop></video>
+
+
+            <button class="clock-button">
+                <img src="videos/relogio1.GIF" alt="Relógio">
+            </button>
+
+
+            <img class="hidden-gif"
+                 src="videos/relogio.gif"
+                 alt="GIF do relógio ampliado">
+            <div class="intro-arrow" aria-hidden="true">↘</div>
+        </section>
+
+        <section class="scene scene-text-block scene-dark">
+            <p class="listen-line"></p>
+        </section>
+
+        <section class="scene scene-full-media scene-extra scene-cena2">
+            <div class="scene-extra-content">
+                <img class="balao-gif" src="videos/balao.gif" alt="Balão a flutuar" aria-hidden="true">
+                <div class="cena2-video-wrapper">
+                    <video src="videos/cena2.mp4" class="cena2-video" autoplay muted playsinline >
+
+                    </video> </div>
+            </div>
+        </section>
+
+        <section class="scene scene-text-block ">
+            <p class="hover-grow-text"></p>
+        </section>
+
+        <section class="scene scene-full-media scene-extra">
+            <video
+                    id="pernilVideo"
+                    class="scene-video"
+                    src="videos/pernilfim.mov"
+                    muted
+                    playsinline
+                    preload="auto"
+            ></video>
+        </section>
+
+        <section class="scene scene-text-block scene-blur-intro">
+            <p></p>
+        </section>
+
+
+        <section class="scene scene-full-media scene-extra">
+
+
+            <div class="blood-layer">
+                <video class="blood-video" src="videos/sangue.MP4" muted playsinline></video>
+            </div>
+
+
+            <div class="extra-parallax-text">
+                <p class="thought thought-1" data-speed="0.45"></p>
+                <p class="thought thought-2" data-speed="0.9"></p>
+                <p class="thought thought-3" data-speed="1.3"></p>
+                <p class="thought thought-4" data-speed="1.6"></p>
+                <p class="thought thought-5" data-speed="0.7"></p>
+                <p class="thought thought-6" data-speed="1.8"></p>
+                <p class="thought thought-7" data-speed="0.95"></p>
+                <p class="thought thought-8" data-speed="1.35"></p>
+                <p class="thought thought-9" data-speed="0.6"></p>
+                <p class="thought thought-10" data-speed="1.55"></p>
+                <p class="thought thought-11" data-speed="1.1"></p>
+                <p class="thought thought-12" data-speed="1.05" data-speed-x="-0.18"></p>
+                <p class="thought thought-13" data-speed="0.85" data-speed-x="0.22"></p>
+                <p class="thought thought-14" data-speed="1.2" data-speed-x="-0.16"></p>
+                <p class="thought thought-15" data-speed="0.65" data-speed-x="0.28"></p>
+            </div>
+
+        </section>
+
+
+        <section class="scene scene-text-block scene-meat">
+            <p class="meat-melt-text"
+               data-text=""></p>
+        </section>
+
+        <section class="scene scene-full-media scene-extra scene-forno">
+            <div class="scene-extra-content">
+
+                <div class="forno-layer">
+                    <video
+                            class="forno-video"
+                            poster="videos/forno.GIF"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                    ></video>
+                    <img
+                            class="forno-overlay"
+                            src="videos/forno1.gif"
+                            alt="Forno overlay">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="scene scene-text-block">
+            <p class="flicker-text"></p>
+        </section>
+
+        <section class="scene scene-full-media scene-extra scene-compras">
+            <div class="scene-extra-ent">
+
+                <div class="compras-video-layer">
+                    <video
+                            src="videos/compras.MP4"
+                            class="compras-video"
+                            autoplay
+                            muted
+                            playsinline
+                    ></video>
+                    <img src="videos/estante.png" alt="Estante" class="compras-overlay">
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="scene scene-text-block scene-dead">
+            <div class="dead-overlay" aria-hidden="true"></div>
+            <p></p>
+        </section>
+
+        <section class="scene scene-full-media scene-extra scene-compras scene-telefone">
+            <div class="scene-extra-ent">
+
+                <div class="compras-video-layer telefone-video-layer">
+                    <video
+                            src="videos/telefone.mp4"
+                            class="compras-video telefone-video"
+                            muted
+                            playsinline
+                    ></video>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="scene scene-text-block scene-text-invert">
+            <p class="circle-text"></p>
+        </section>
+        <section class="scene scene-full-media scene-investigar">
+            <video
+                    src="videos/investigar.mp4"
+                    class="investigar-video"
+                    muted
+                    playsinline
+            ></video>
+        </section>
+
+        <section class="scene scene-text-block scene-lamb-invite">
+            <p></p>
+        </section>
+
+        <section class="scene scene-full-media scene-extra scene-refeicao">
+            <div class="scene-extra-content">
+                <video
+                        src="videos/refeicao.MP4"
+                        class="refeicao-video"
+
+                        autoplay
+                        muted
+                        playsinline
+                ></video>
+                <img src="videos/balao1.gif" alt="" class="balao-refeicao balao-refeicao-1" aria-hidden="true">
+                <img src="videos/balao2.gif" alt="" class="balao-refeicao balao-refeicao-2" aria-hidden="true">
+            </div>
+        </section>
+
+        <section class="scene scene-text-block scene-giggle">
+            <p class="giggle-text"></p>
+        </section>
+
+        <section class="scene scene-full-media scene-extra scene-riso">
+            <div class="scene-extra-content">
+                <video
+                        src="videos/riso.mp4"
+                        class="riso-video"
+                        playsinline
+                        preload="auto"
+                ></video>
+                <div class="riso-arrow" aria-hidden="true">↓</div>
+            </div>
+        </section>
+
+        <section class="scene scene-text-block scene-end">
+            <video class="end-video" src="videos/end.mp4" muted playsinline></video>
+            <button class="restart-button" type="button" aria-label="Restart experience">Restart</button>
+        </section>
+
+    </div>
+
+</div>
+<audio id="maryAudio" src="audios/mary.wav" preload="auto"></audio>
+<audio id="clockAudio" src="audios/relogio.mp3" preload="auto"></audio>
+<audio id="tricotarAudio" src="audios/tricotar.mp3" preload="auto"></audio>
+<audio id="batidaAudio" src="audios/batida.mp3" preload="auto"></audio>
+<audio id="fornoAudio" src="audios/forno.mp3" preload="auto"></audio>
+<audio id="timerAudio" src="audios/timer.mp3" preload="auto"></audio>
+<audio id="supermercadoAudio" src="audios/supermercado.mp3" preload="auto"></audio>
+<audio id="carrinhoAudio" src="audios/carrinho.mp3" preload="auto"></audio>
+<audio id="carroAudio" src="audios/carro.mp3" preload="auto"></audio>
+<audio id="tensaoAudio" src="audios/tensao.mp3" preload="auto"></audio>
+<audio id="portaAudio" src="audios/porta.mp3" preload="auto"></audio>
+<audio id="baterAudio" src="audios/bater.wav" preload="auto"></audio>
+<audio id="ouvidoAudio" src="audios/ouvido.mp3" preload="auto"></audio>
+<audio id="comidaAudio" src="audios/comida.mp3" preload="auto"></audio>
+<audio id="comida2Audio" src="audios/comida3.mp3" preload="auto"></audio>
+<audio id="creepyAudio" src="audios/creepy.mp3" preload="auto"></audio>
+<audio id="dingAudio" src="audios/ding.mp3" preload="auto"></audio>
+<audio id="winkAudio" src="audios/wink.mp3" preload="auto"></audio>
+<audio id="tensao1Audio" src="audios/tensao1.mp3" preload="auto"></audio>
+<audio id="tensao2Audio" src="audios/tensao2.mp3" preload="auto"></audio>
+
+<svg class="visually-hidden" aria-hidden="true" focusable="false">
+    <filter id="heat-waves">
+        <feTurbulence type="fractalNoise"
+                      baseFrequency="0.009 0.022"
+                      numOctaves="3"
+                      seed="8">
+            <animate attributeName="baseFrequency"
+                     dur="8s"
+                     values="0.009 0.022;0.014 0.035;0.009 0.022"
+                     repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic"
+                           scale="12"
+                           xChannelSelector="R"
+                           yChannelSelector="G">
+            <animate attributeName="scale"
+                     dur="6s"
+                     values="6;14;10;12"
+                     repeatCount="indefinite" />
+        </feDisplacementMap>
+    </filter>
+</svg>
+
+<script src="script.js?v=7"></script>
+</body>
+</html>
