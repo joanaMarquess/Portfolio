@@ -1808,6 +1808,8 @@ const translations = {
     "about.title": "About me",
     "about.text":
       "I am a multidisciplinary designer with a special interest in UX/UI, interactive design and digital experiences.\nI enjoy creating projects that bring together aesthetics and functionality, exploring typography, layout and interaction as ways to make communication clearer, more engaging and more intuitive.\nThroughout my path, I have worked across different formats, from editorial to digital, always with a practical, curious and experimental approach.\nI am interested in understanding how people interact with what I design and in finding visual solutions that are useful, coherent and meaningful.",
+    "about.text.mobile":
+      "I am a multidisciplinary designer with a special interest in UX/UI, interactive design and digital experiences.\nThroughout my path, I have worked across different formats, from editorial to digital, always with a practical, curious and experimental approach.\nI am interested in understanding how people interact with what I design and in finding visual solutions that are useful, coherent and meaningful.",
     "about.cv.open": "Open CV",
     "tools.intro": "a small dock with the tools I return to most.",
     "tools.aria": "Apps I use dock",
@@ -1943,6 +1945,8 @@ const translations = {
     "about.title": "Sobre mim",
     "about.text":
       "Sou uma designer multidisciplinar com especial interesse em UX/UI, design interativo e experiências digitais. Gosto de criar projetos que juntam estética e funcionalidade, explorando tipografia, layout e interação como formas de tornar a comunicação mais clara, envolvente e intuitiva.\nAo longo do meu percurso, tenho trabalhado em diferentes formatos, do editorial ao digital, sempre com uma abordagem prática, curiosa e experimental. Interessa-me perceber como as pessoas interagem com aquilo que desenho e encontrar soluções visuais que sejam úteis, coerentes e significativas.",
+    "about.text.mobile":
+      "Sou uma designer multidisciplinar com especial interesse em UX/UI, design interativo e experiências digitais.\nAo longo do meu percurso, tenho trabalhado em diferentes formatos, do editorial ao digital, sempre com uma abordagem prática, curiosa e experimental. Interessa-me perceber como as pessoas interagem com aquilo que desenho e encontrar soluções visuais que sejam úteis, coerentes e significativas.",
     "about.cv.open": "Abrir CV",
     "tools.intro": "uma pequena dock com as ferramentas a que volto mais vezes.",
     "tools.aria": "Dock das apps que mais uso",
@@ -2011,6 +2015,19 @@ const getTranslation = (key) => {
   return dictionary[key] || translations.en[key] || key;
 };
 
+const aboutTextNode = document.querySelector('[data-i18n="about.text"]');
+const aboutMobileQuery = window.matchMedia("(max-width: 700px)");
+
+const updateResponsiveAboutText = () => {
+  if (!aboutTextNode) {
+    return;
+  }
+
+  aboutTextNode.textContent = getTranslation(
+    aboutMobileQuery.matches ? "about.text.mobile" : "about.text"
+  );
+};
+
 const applyLanguage = (lang) => {
   currentLang = lang;
   const dictionary = translations[lang] || translations.en;
@@ -2024,6 +2041,8 @@ const applyLanguage = (lang) => {
       node.textContent = value;
     }
   });
+
+  updateResponsiveAboutText();
 
   i18nAttrNodes.forEach((node) => {
     const map = node.getAttribute("data-i18n-attr");
@@ -2062,6 +2081,10 @@ const applyLanguage = (lang) => {
     // Ignore storage errors.
   }
 };
+
+if (aboutTextNode) {
+  aboutMobileQuery.addEventListener("change", updateResponsiveAboutText);
+}
 
 const getStoredLanguage = () => {
   try {
