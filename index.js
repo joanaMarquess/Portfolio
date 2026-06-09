@@ -4,6 +4,9 @@ const title = document.querySelector(".hero__name");
 const randomBetween = (min, max) => min + Math.random() * (max - min);
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const usesTouchScroll = window.matchMedia(
+  "(hover: none), (pointer: coarse), (max-width: 900px)"
+).matches;
 let gridPulseTimeoutId = null;
 let heroIntroProgress = 0;
 let applyHeroIntro = null;
@@ -47,11 +50,86 @@ const scrollWindowImmediate = (top) => {
   root.style.scrollBehavior = previousScrollBehavior;
 };
 const resetScroll = () => scrollWindowImmediate(0);
-if (document.readyState === "complete") {
-  resetScroll();
-} else {
-  window.addEventListener("load", resetScroll);
-}
+resetScroll();
+
+let mobileIntroNudgeRaf = null;
+let mobileIntroNudgeTimeout = null;
+let mobileIntroNudgeDone = false;
+
+const cancelMobileIntroNudge = () => {
+  if (mobileIntroNudgeRaf) {
+    cancelAnimationFrame(mobileIntroNudgeRaf);
+    mobileIntroNudgeRaf = null;
+  }
+  if (mobileIntroNudgeTimeout) {
+    window.clearTimeout(mobileIntroNudgeTimeout);
+    mobileIntroNudgeTimeout = null;
+  }
+};
+
+const startMobileIntroNudge = () => {
+  if (!usesTouchScroll || prefersReducedMotion || mobileIntroNudgeDone) {
+    return;
+  }
+
+  mobileIntroNudgeDone = true;
+  cancelMobileIntroNudge();
+
+  mobileIntroNudgeTimeout = window.setTimeout(() => {
+    mobileIntroNudgeTimeout = null;
+
+    if (
+      storyActive ||
+      document.querySelector(".work-item.is-open") ||
+      window.scrollY > 24
+    ) {
+      return;
+    }
+
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const startY = window.scrollY;
+    const distance = clamp(window.innerHeight * 0.16, 72, 135);
+    const targetY = clamp(startY + distance, 0, maxScroll);
+    if (targetY <= startY) {
+      return;
+    }
+
+    const duration = 820;
+    const startTime = performance.now();
+    const cancelEvents = ["touchstart", "touchmove", "wheel", "keydown", "pointerdown"];
+
+    const cleanup = () => {
+      cancelEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, stopNudge);
+      });
+    };
+
+    const stopNudge = () => {
+      cleanup();
+      cancelMobileIntroNudge();
+    };
+
+    cancelEvents.forEach((eventName) => {
+      window.addEventListener(eventName, stopNudge, { passive: true, once: true });
+    });
+
+    const step = (time) => {
+      const progress = clamp((time - startTime) / duration, 0, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      scrollWindowImmediate(startY + (targetY - startY) * eased);
+
+      if (progress < 1) {
+        mobileIntroNudgeRaf = requestAnimationFrame(step);
+        return;
+      }
+
+      mobileIntroNudgeRaf = null;
+      cleanup();
+    };
+
+    mobileIntroNudgeRaf = requestAnimationFrame(step);
+  }, 260);
+};
 
 const cursorSquare = document.querySelector(".cursor-square");
 const cursorDot = document.querySelector(".cursor-dot");
@@ -293,6 +371,7 @@ if (introOverlay) {
     document.body.style.setProperty("--intro-overlay-opacity", "0");
     document.body.style.setProperty("--intro-overlay-bg", "0");
     introOverlay.remove();
+    startMobileIntroNudge();
   };
 
   const applyDeltaToProgress = (current, delta, distance) => {
@@ -338,6 +417,8 @@ if (introOverlay) {
         const target = clamp(window.scrollY + leftover, 0, maxScroll);
         scrollWindowImmediate(target);
       }
+
+      startMobileIntroNudge();
     };
 
     const startIntroAuto = () => {
@@ -478,7 +559,7 @@ const limitScrollSpeed = () => {
       return;
     }
 
-    if (hasOpenWorkItem()) {
+    if (hasOpenWorkItem() && !usesTouchScroll) {
       const delta = normalizeWheelDelta(event);
       if (maybeHandleWorkFocusOverflow(delta)) {
         event.preventDefault();
@@ -584,13 +665,6 @@ const onStoryTouchMove = (event) => {
   storyTouchY = currentY;
 
   if (!storyActive || typeof handleStoryScroll !== "function") {
-    if (!hasOpenWorkItem()) {
-      return;
-    }
-
-    if (maybeHandleWorkFocusOverflow(delta)) {
-      event.preventDefault();
-    }
     return;
   }
 
@@ -858,7 +932,7 @@ if (title && !prefersReducedMotion) {
   }
 }
 
-if (!prefersReducedMotion) {
+if (!prefersReducedMotion && !usesTouchScroll) {
   const driftAmplitude = 1.2;
   const driftSpeed = 0.00025;
   const idleDelay = 1400;
@@ -1223,6 +1297,10 @@ if (workItems.length && !prefersReducedMotion) {
   });
 
   const maybeSnapWork = () => {
+    if (usesTouchScroll) {
+      return;
+    }
+
     if (!workSection || !workItemList.length) {
       return;
     }
@@ -1380,6 +1458,10 @@ const clampWorkFocusScroll = () => {
 };
 
 const requestWorkFocusClamp = () => {
+  if (usesTouchScroll) {
+    return;
+  }
+
   if (workFocusClampRaf) {
     return;
   }
@@ -1421,6 +1503,10 @@ const scrollWorkFocusToEdge = (edge) => {
 };
 
 const maybeHandleWorkFocusOverflow = (delta) => {
+  if (usesTouchScroll) {
+    return false;
+  }
+
   const bounds = getWorkFocusBounds();
   if (!bounds) {
     return false;
@@ -1544,8 +1630,8 @@ const scrollWorkIntoView = (workItem) => {
       const itemTop = getElementDocumentTop(workItem);
       const bounds = getWorkFocusBounds();
       const maxDocumentScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-      const minScroll = bounds ? bounds.minScroll : 0;
-      const maxScroll = bounds ? bounds.maxScroll : maxDocumentScroll;
+      const minScroll = !usesTouchScroll && bounds ? bounds.minScroll : 0;
+      const maxScroll = !usesTouchScroll && bounds ? bounds.maxScroll : maxDocumentScroll;
       const target = clamp(itemTop - offset, minScroll, maxScroll);
 
       if (Math.abs(target - window.scrollY) < 6) {
