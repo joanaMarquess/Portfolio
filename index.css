@@ -1968,7 +1968,7 @@ body.work-focus .work-item:not(.is-open) {
 
 .safepoint-card--hero {
   grid-template-columns: 1fr;
-  min-height: auto;
+  min-height: clamp(320px, 48vw, 620px);
   padding: 0;
   background: transparent;
 }
@@ -2082,12 +2082,13 @@ body.work-focus .work-item:not(.is-open) {
 .safepoint-card__phones--hero {
   justify-content: center;
   width: 100%;
-  min-height: auto;
+  min-height: inherit;
   padding: 0;
   background: transparent;
 }
 
 .safepoint-card__phones--hero img {
+  display: block;
   width: 100%;
   max-width: none;
   max-height: none;
@@ -2095,8 +2096,10 @@ body.work-focus .work-item:not(.is-open) {
 
 .safepoint-card__mockup {
   width: calc(100% + 4px);
+  height: 100%;
   max-width: none;
   margin: -2px;
+  object-fit: cover;
   transform: none;
 }
 
@@ -3230,6 +3233,7 @@ body.work-focus .work-item:not(.is-open) {
 
   .safepoint-card--hero {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .safepoint-card--hero .safepoint-card__copy {
@@ -3265,6 +3269,7 @@ body.work-focus .work-item:not(.is-open) {
 
   .safepoint-card__phones--hero img {
     width: 100%;
+    height: auto;
     max-height: none;
   }
 
@@ -3604,12 +3609,15 @@ body.work-focus .work-item:not(.is-open) {
 
   .safepoint-card__phones--hero img {
     width: 100%;
+    height: auto;
     max-height: none;
   }
 
   .safepoint-card__mockup {
     width: 100%;
+    height: auto;
     margin: 0;
+    object-fit: contain;
   }
 
   .safepoint-card--hero .safepoint-card__copy {
