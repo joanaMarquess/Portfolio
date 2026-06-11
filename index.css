@@ -2080,6 +2080,7 @@ body.work-focus .work-item:not(.is-open) {
 }
 
 .safepoint-card__phones--hero {
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
   min-height: inherit;
@@ -2100,6 +2101,7 @@ body.work-focus .work-item:not(.is-open) {
   max-width: none;
   margin: -2px;
   object-fit: cover;
+  object-position: top center;
   transform: none;
 }
 
