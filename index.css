@@ -2114,10 +2114,12 @@ body.work-focus .work-item:not(.is-open) {
 .safepoint-card__figma {
   position: relative;
   z-index: 1;
+  display: block;
   width: 100%;
   aspect-ratio: 3024 / 1964;
-  object-fit: cover;
-  object-position: 8% 50%;
+  object-fit: contain;
+  object-position: center;
+  background: #ffffff;
   border: 1px solid rgba(63, 110, 214, 0.14);
   border-radius: 18px;
   box-shadow: 0 18px 26px rgba(24, 30, 54, 0.14);
