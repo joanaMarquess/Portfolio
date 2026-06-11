@@ -1968,7 +1968,7 @@ body.work-focus .work-item:not(.is-open) {
 
 .safepoint-card--hero {
   grid-template-columns: 1fr;
-  min-height: clamp(320px, 48vw, 620px);
+  min-height: auto;
   padding: 0;
   background: transparent;
 }
@@ -2097,10 +2097,10 @@ body.work-focus .work-item:not(.is-open) {
 
 .safepoint-card__mockup {
   width: calc(100% + 4px);
-  height: 100%;
+  height: auto;
   max-width: none;
   margin: -2px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
   transform: none;
 }
