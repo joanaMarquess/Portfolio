@@ -1851,6 +1851,16 @@ body.work-focus .work-item:not(.is-open) {
   max-width: min(48ch, 100%);
 }
 
+.work-item__type-specimen--eateasy {
+  max-width: min(62ch, 100%);
+}
+
+.work-item__type-specimen--eateasy .work-item__type-alphabet {
+  font-size: clamp(1.2rem, 2vw, 1.78rem);
+  white-space: nowrap;
+  word-break: normal;
+}
+
 .work-item__type-alphabet {
   font-family: "Sora", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.4rem, 2.5vw, 2.1rem);
@@ -2236,8 +2246,9 @@ body.work-focus .work-item:not(.is-open) {
 .beyond-earth-video__media {
   display: block;
   width: 100%;
+  aspect-ratio: 16 / 9;
   height: auto;
-  object-fit: initial;
+  object-fit: cover;
   border-radius: 16px;
   border: 1px solid rgba(63, 110, 214, 0.18);
   background: transparent;
