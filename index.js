@@ -1112,6 +1112,7 @@ if (!prefersReducedMotion) {
 
 const identityTitle = document.querySelector(".identity-title");
 const identityPanel = document.querySelector(".identity-panel");
+const identityPhoto = document.querySelector(".identity-photo");
 if (identityTitle && identityPanel) {
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     identityTitle.classList.add("is-visible");
@@ -1131,6 +1132,40 @@ if (identityTitle && identityPanel) {
     );
     identityObserver.observe(identityPanel);
   }
+}
+
+if (identityPhoto && identityPanel && !prefersReducedMotion) {
+  const photoParallaxMax = usesTouchScroll ? 12 : 22;
+  let identityPhotoRafId = null;
+
+  const updateIdentityPhotoParallax = () => {
+    const rect = identityPanel.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    if (rect.bottom < -viewportHeight * 0.15 || rect.top > viewportHeight * 1.15) {
+      identityPhoto.style.setProperty("--identity-photo-parallax", "0px");
+      identityPhotoRafId = null;
+      return;
+    }
+
+    const sectionCenter = rect.top + rect.height / 2;
+    const viewportCenter = viewportHeight / 2;
+    const progress = clamp((viewportCenter - sectionCenter) / viewportHeight, -1, 1);
+    const offset = progress * photoParallaxMax;
+
+    identityPhoto.style.setProperty("--identity-photo-parallax", `${offset.toFixed(2)}px`);
+    identityPhotoRafId = null;
+  };
+
+  const requestIdentityPhotoParallax = () => {
+    if (!identityPhotoRafId) {
+      identityPhotoRafId = requestAnimationFrame(updateIdentityPhotoParallax);
+    }
+  };
+
+  updateIdentityPhotoParallax();
+  window.addEventListener("scroll", requestIdentityPhotoParallax, { passive: true });
+  window.addEventListener("resize", requestIdentityPhotoParallax);
 }
 
 const toolsPanel = document.querySelector(".tools-panel");
@@ -1893,9 +1928,9 @@ const translations = {
     "work.backtop.aria": "Back to the top of the project",
     "about.title": "About me",
     "about.text":
-      "I am a multidisciplinary designer with a special interest in UX/UI, interactive design and digital experiences.\nI enjoy creating projects that bring together aesthetics and functionality, exploring typography, layout and interaction as ways to make communication clearer, more engaging and more intuitive.\nThroughout my path, I have worked across different formats, from editorial to digital, always with a practical, curious and experimental approach.\nI am interested in understanding how people interact with what I design and in finding visual solutions that are useful, coherent and meaningful.",
+      "I’m a designer who enjoys working between visuals, interaction and digital experiences. I’m especially interested in UX/UI and in creating things that are not only nice to look at, but also easy to understand and use.\nI’ve explored different kinds of projects, from editorial design to websites and interactive work, and I like bringing that mix into what I do. I’m curious, hands-on and still learning, but I care a lot about making thoughtful design decisions and improving with every project.\nAt the moment, I’m looking for opportunities where I can grow, collaborate with other people and gain more experience in real design and digital product environments.",
     "about.text.mobile":
-      "I am a multidisciplinary designer with a special interest in UX/UI, interactive design and digital experiences.\nThroughout my path, I have worked across different formats, from editorial to digital, always with a practical, curious and experimental approach.\nI am interested in understanding how people interact with what I design and in finding visual solutions that are useful, coherent and meaningful.",
+      "I’m a designer who enjoys working between visuals, interaction and digital experiences. I’m especially interested in UX/UI and in creating things that are not only nice to look at, but also easy to understand and use.\nI’ve explored different kinds of projects, from editorial design to websites and interactive work, and I like bringing that mix into what I do. I’m curious, hands-on and still learning, but I care a lot about making thoughtful design decisions and improving with every project.\nAt the moment, I’m looking for opportunities where I can grow, collaborate with other people and gain more experience in real design and digital product environments.",
     "about.cv.open": "Open CV",
     "tools.intro": "a small dock with the tools I return to most.",
     "tools.aria": "Apps I use dock",
@@ -2030,9 +2065,9 @@ const translations = {
     "work.backtop.aria": "Voltar ao topo do projeto",
     "about.title": "Sobre mim",
     "about.text":
-      "Sou uma designer multidisciplinar com especial interesse em UX/UI, design interativo e experiências digitais. Gosto de criar projetos que juntam estética e funcionalidade, explorando tipografia, layout e interação como formas de tornar a comunicação mais clara, envolvente e intuitiva.\nAo longo do meu percurso, tenho trabalhado em diferentes formatos, do editorial ao digital, sempre com uma abordagem prática, curiosa e experimental. Interessa-me perceber como as pessoas interagem com aquilo que desenho e encontrar soluções visuais que sejam úteis, coerentes e significativas.",
+      "Sou uma designer que gosta de trabalhar entre o visual, a interação e as experiências digitais. Tenho especial interesse por UX/UI e por criar coisas que não sejam apenas bonitas de ver, mas também fáceis de compreender e utilizar.\nTenho explorado diferentes tipos de projetos, desde design editorial a websites e trabalhos interativos, e gosto de trazer essa mistura para aquilo que faço. Sou curiosa, prática e ainda estou a aprender, mas preocupo-me muito em tomar decisões de design pensadas e em melhorar com cada projeto.\nNeste momento, procuro oportunidades onde possa crescer, colaborar com outras pessoas e ganhar mais experiência em contextos reais de design e produto digital.",
     "about.text.mobile":
-      "Sou uma designer multidisciplinar com especial interesse em UX/UI, design interativo e experiências digitais.\nAo longo do meu percurso, tenho trabalhado em diferentes formatos, do editorial ao digital, sempre com uma abordagem prática, curiosa e experimental. Interessa-me perceber como as pessoas interagem com aquilo que desenho e encontrar soluções visuais que sejam úteis, coerentes e significativas.",
+      "Sou uma designer que gosta de trabalhar entre o visual, a interação e as experiências digitais. Tenho especial interesse por UX/UI e por criar coisas que não sejam apenas bonitas de ver, mas também fáceis de compreender e utilizar.\nTenho explorado diferentes tipos de projetos, desde design editorial a websites e trabalhos interativos, e gosto de trazer essa mistura para aquilo que faço. Sou curiosa, prática e ainda estou a aprender, mas preocupo-me muito em tomar decisões de design pensadas e em melhorar com cada projeto.\nNeste momento, procuro oportunidades onde possa crescer, colaborar com outras pessoas e ganhar mais experiência em contextos reais de design e produto digital.",
     "about.cv.open": "Abrir CV",
     "tools.intro": "uma pequena dock com as ferramentas a que volto mais vezes.",
     "tools.aria": "Dock das apps que mais uso",

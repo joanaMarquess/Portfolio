@@ -932,19 +932,30 @@ body.header-visible .site-header {
   margin: 0;
 }
 
-.identity-photo {
-  --identity-photo-zoom: 1.12;
+.identity-photo-frame {
   width: 100%;
   max-width: 380px;
   aspect-ratio: 4 / 5;
   border-radius: 55px;
-  object-fit: cover;
-  object-position: 58% 38%;
-  transform: scale(var(--identity-photo-zoom));
-  transform-origin: center;
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(135deg, rgba(20, 36, 58, 0.95), rgba(9, 12, 18, 0.98));
   border: 1px solid rgba(63, 110, 214, 0.25);
   box-shadow: 0 22px 48px rgba(5, 8, 14, 0.55);
+}
+
+.identity-photo {
+  --identity-photo-zoom: 1.12;
+  --identity-photo-parallax: 0px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 38%;
+  transform: translate3d(0, var(--identity-photo-parallax), 0) scale(var(--identity-photo-zoom));
+  transform-origin: center;
+  will-change: transform;
 }
 
 .identity-body {
@@ -1042,7 +1053,7 @@ body.header-visible .site-header {
   animation: none;
 }
 
-.js-enabled .identity-panel .identity-photo,
+.js-enabled .identity-panel .identity-photo-frame,
 .js-enabled .identity-panel .identity-title,
 .js-enabled .identity-panel .identity-body p,
 .js-enabled .identity-panel .identity-cv {
@@ -1052,8 +1063,11 @@ body.header-visible .site-header {
   will-change: transform, opacity;
 }
 
-.js-enabled .identity-panel .identity-photo {
-  transform: translateY(32px) rotate(-1.5deg) scale(calc(var(--identity-photo-zoom) * 0.98));
+.js-enabled .identity-panel .identity-photo-frame {
+  transform:
+    translate3d(0, 32px, 0)
+    rotate(-1.5deg)
+    scale(0.98);
   transition-delay: 0.05s;
 }
 
@@ -1069,7 +1083,7 @@ body.header-visible .site-header {
   transition-delay: 0.3s;
 }
 
-.js-enabled .identity-panel.is-visible .identity-photo,
+.js-enabled .identity-panel.is-visible .identity-photo-frame,
 .js-enabled .identity-panel.is-visible .identity-title,
 .js-enabled .identity-panel.is-visible .identity-body p,
 .js-enabled .identity-panel.is-visible .identity-cv {
@@ -1077,8 +1091,11 @@ body.header-visible .site-header {
   transform: translateY(0);
 }
 
-.js-enabled .identity-panel.is-visible .identity-photo {
-  transform: translateY(0) rotate(0deg) scale(var(--identity-photo-zoom));
+.js-enabled .identity-panel.is-visible .identity-photo-frame {
+  transform:
+    translate3d(0, 0, 0)
+    rotate(0deg)
+    scale(1);
 }
 
 .tools-panel {
@@ -2914,7 +2931,7 @@ body.work-focus .work-item:not(.is-open) {
     text-align: left;
   }
 
-  .identity-photo {
+  .identity-photo-frame {
     display: none;
   }
 
@@ -3071,7 +3088,7 @@ body.work-focus .work-item:not(.is-open) {
     text-align: center;
   }
 
-  .identity-photo {
+  .identity-photo-frame {
     max-width: 320px;
   }
 
