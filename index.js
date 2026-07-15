@@ -1853,6 +1853,9 @@ const translations = {
     "work.meta.visualidentity": "Visual identity · 2024",
     "work.meta.tmd": "Website with backend · 2025",
     "work.meta.game": "Game · 2025",
+    "work.meta.video1": "Video editing · 2025",
+    "work.meta.video2": "Animation · 2025",
+    "work.meta.rollingloud": "Visual identity · 2025",
     "work.meta.p3": "Digital storytelling · 2025",
     "work.meta.blender": "3D animation · 2025",
     "work.meta.musicvideo": "mobile app design · 2026",
@@ -1864,6 +1867,14 @@ const translations = {
     "work.tmd.type": "Typography",
     "work.desc.game":
       "Robot Adventure is a 2D top-down game where the player controls a small robot exploring a polluted forest, collecting waste and revitalizing plants while managing limited energy and avoiding obstacles. The project combines game mechanics, interaction design, and environmental storytelling, with increasing difficulty levels and a focus on sustainability.",
+    "work.tools.video1": "Video editing",
+    "work.tools.video2": "After Effects · Animation · Video editing",
+    "work.desc.video1":
+      "Videoclip created from a list of given songs. The objective was to develop a visual rhythm and narrative interpretation through editing, building a music video from the selected audio material.",
+    "work.desc.video2":
+      "Animation created from a poem chosen from a given list. The project allowed full creative freedom, exploring the relationship between text, image, rhythm and movement through a black-and-white visual language.",
+    "work.desc.rollingloud":
+      "This project reimagines the visual identity of Rolling Loud, starting from an existing event and developing a new graphic direction for it. The work explores how an established music event can gain a renewed visual language while keeping its energy, scale and cultural presence.",
     "work.desc.p3":
       "Lamb to the Slaughter is an interactive web experience based on the short story by Roald Dahl. The project reinterprets the narrative through scroll-based interaction, visual storytelling and animated moments that guide the user through key scenes of the story. " +
       "Using a minimal black-and-white visual language, the experience creates contrast between the ordinary domestic setting and the violence hidden within the plot. The interaction invites the user to progress through the story gradually, turning reading into a more immersive and cinematic experience.",
@@ -1923,6 +1934,7 @@ const translations = {
     "work.play.prompt": "Tap to play",
     "work.launch.prompt": "Tap to launch",
     "work.project.open": "open full project",
+    "work.video.placeholder.open": "open placeholder project",
     "work.project.sample": "project sample",
     "work.backtop": "back to the top",
     "work.backtop.aria": "Back to the top of the project",
@@ -1949,6 +1961,12 @@ const translations = {
     "alt.game.special": "Game element: special",
     "alt.game.tronco": "Game element: trunk",
     "alt.game.play": "EcoBot game",
+    "alt.video1.video": "Music Video",
+    "alt.video1.thumb": "Music Video",
+    "alt.video2.video": "animated poem video",
+    "alt.video2.palette": "animated poem color palette",
+    "alt.video2.thumb": "animated poem video",
+    "alt.rollingloud.poster": "Rolling Loud visual identity poster",
     "alt.beyondearth.play": "Beyond Earth interactive experience",
     "alt.beyondearth.videos": "Beyond Earth experience videos",
     "alt.beyondearth.video.title": "Beyond Earth title sequence",
@@ -1990,6 +2008,9 @@ const translations = {
     "work.meta.visualidentity": "Identidade visual · 2024",
     "work.meta.tmd": "Website com backend · 2025",
     "work.meta.game": "Jogo · 2025",
+    "work.meta.video1": "Edição de vídeo · 2025",
+    "work.meta.video2": "Animação · 2025",
+    "work.meta.rollingloud": "Identidade visual · 2025",
     "work.meta.p3": "Storytelling digital · 2025",
     "work.meta.blender": "Animação 3D · 2025",
     "work.meta.musicvideo": "design de aplicação móvel · 2026",
@@ -2001,6 +2022,14 @@ const translations = {
     "work.tmd.type": "Tipografia",
     "work.desc.game":
       "Robot Adventure é um jogo 2D top-down em que o jogador controla um pequeno robô que explora uma floresta poluída, recolhe resíduos e revitaliza plantas, enquanto gere energia limitada e evita obstáculos. O projeto combina mecânicas de jogo, design de interação e narrativa ambiental, com níveis de dificuldade crescente e foco na sustentabilidade.",
+    "work.tools.video1": "Edição de vídeo",
+    "work.tools.video2": "After Effects · Animação · Edição de vídeo",
+    "work.desc.video1":
+      "Videoclip criado a partir de uma lista de músicas dadas. O objetivo foi desenvolver ritmo visual e uma interpretação narrativa através da edição, construindo um videoclip a partir do material áudio selecionado.",
+    "work.desc.video2":
+      "Animação criada a partir de um poema escolhido entre uma lista de poemas. O projeto dava total liberdade criativa, explorando a relação entre texto, imagem, ritmo e movimento através de uma linguagem visual a preto e branco.",
+    "work.desc.rollingloud":
+      "Este projeto reinventa a identidade visual do Rolling Loud, partindo de um evento já existente e desenvolvendo uma nova direção gráfica para ele. O trabalho explora como um evento musical estabelecido pode ganhar uma linguagem visual renovada, mantendo a sua energia, escala e presença cultural.",
     "work.desc.p3":
       "Lamb to the Slaughter é uma experiência web interativa baseada no conto de Roald Dahl. O projeto reinterpreta a narrativa através de interação baseada em scroll, storytelling visual e momentos animados que guiam o utilizador por cenas-chave da história. " +
       "Com uma linguagem visual minimalista a preto e branco, a experiência cria contraste entre o ambiente doméstico comum e a violência escondida no enredo. A interação convida o utilizador a avançar gradualmente pela história, transformando a leitura numa experiência mais imersiva e cinematográfica.",
@@ -2060,6 +2089,7 @@ const translations = {
     "work.play.prompt": "Toca para jogar",
     "work.launch.prompt": "Toca para iniciar",
     "work.project.open": "abrir projeto completo",
+    "work.video.placeholder.open": "abrir projeto placeholder",
     "work.project.sample": "amostra do projeto",
     "work.backtop": "voltar ao topo",
     "work.backtop.aria": "Voltar ao topo do projeto",
@@ -2086,6 +2116,12 @@ const translations = {
     "alt.game.special": "Elemento do jogo: especial",
     "alt.game.tronco": "Elemento do jogo: tronco",
     "alt.game.play": "Jogo EcoBot",
+    "alt.video1.video": "Music Video",
+    "alt.video1.thumb": "Music Video",
+    "alt.video2.video": "Vídeo do poema animado",
+    "alt.video2.palette": "Paleta de cores do poema animado",
+    "alt.video2.thumb": "Vídeo do poema animado",
+    "alt.rollingloud.poster": "Poster da identidade visual Rolling Loud",
     "alt.beyondearth.play": "Experiência interativa Beyond Earth",
     "alt.beyondearth.videos": "Vídeos da experiência Beyond Earth",
     "alt.beyondearth.video.title": "Sequência de título Beyond Earth",
@@ -2370,6 +2406,44 @@ if (scrollVideos.length) {
   document.addEventListener("visibilitychange", () => {
     updateScrollVideos();
   });
+}
+
+const pauseWhenHiddenVideos = [...document.querySelectorAll("video[data-pause-when-hidden]")];
+
+if (pauseWhenHiddenVideos.length) {
+  const pauseHiddenVideos = () => {
+    pauseWhenHiddenVideos.forEach((video) => {
+      const rect = video.getBoundingClientRect();
+      const visible =
+        rect.bottom > 0 &&
+        rect.right > 0 &&
+        rect.top < window.innerHeight &&
+        rect.left < window.innerWidth;
+
+      if (!visible || document.hidden) {
+        video.pause?.();
+      }
+    });
+  };
+
+  if ("IntersectionObserver" in window) {
+    const pauseWhenHiddenObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || document.hidden) {
+            entry.target.pause?.();
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+
+    pauseWhenHiddenVideos.forEach((video) => pauseWhenHiddenObserver.observe(video));
+  }
+
+  window.addEventListener("scroll", pauseHiddenVideos, { passive: true });
+  window.addEventListener("resize", pauseHiddenVideos);
+  document.addEventListener("visibilitychange", pauseHiddenVideos);
 }
 
 window.addEventListener("message", (event) => {

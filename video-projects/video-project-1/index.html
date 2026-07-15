@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Music Video · Joana Marques</title>
+    <link rel="icon" type="image/png" href="../../icon/favicon-white.png?v=8">
+    <link rel="stylesheet" href="../../index.css?v=61">
+    <style>
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: clamp(24px, 6vw, 72px);
+        }
+
+        .video-placeholder-page {
+            width: min(100%, 1240px);
+            display: grid;
+            gap: clamp(20px, 4vw, 36px);
+        }
+
+        .video-placeholder-page video {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <main class="video-placeholder-page">
+        <video class="work-item__media" controls preload="metadata" playsinline data-pause-when-hidden aria-label="Music Video">
+            <source src="Ex3_PA.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1 class="work-item__title">Music Video</h1>
+        <p class="work-item__description">Videoclip created in 2025 from a list of given songs. The objective was to develop a visual rhythm and narrative interpretation through editing, building a music video from the selected audio material.</p>
+        <a class="work-item__project-link" href="../../video/">back to video portfolio</a>
+    </main>
+    <script>
+        const pauseWhenHiddenVideos = [...document.querySelectorAll("video[data-pause-when-hidden]")];
+        const pauseHiddenVideos = () => {
+            pauseWhenHiddenVideos.forEach((video) => {
+                const rect = video.getBoundingClientRect();
+                const visible = rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+                if (!visible || document.hidden) {
+                    video.pause();
+                }
+            });
+        };
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting || document.hidden) {
+                        entry.target.pause();
+                    }
+                });
+            });
+            pauseWhenHiddenVideos.forEach((video) => observer.observe(video));
+        }
+
+        window.addEventListener("scroll", pauseHiddenVideos, { passive: true });
+        window.addEventListener("resize", pauseHiddenVideos);
+        document.addEventListener("visibilitychange", pauseHiddenVideos);
+    </script>
+</body>
+</html>

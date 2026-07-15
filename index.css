@@ -14,6 +14,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Another Typewriter";
+  src: url("fontes/atwriter.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -1657,6 +1665,14 @@ body.work-focus .work-item:not(.is-open) {
   width: min(100%, 680px);
 }
 
+.work-item.is-open .work-item__media--featured-video {
+  width: min(100%, 1120px);
+}
+
+.work-item.is-open .work-item__media--poster {
+  width: min(100%, 980px);
+}
+
 .work-item__expanded {
   --expanded-max-height: 0px;
   max-height: var(--expanded-max-height);
@@ -1790,6 +1806,13 @@ body.work-focus .work-item:not(.is-open) {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.work-item__palette-grid--compact {
+  --compact-swatch-size: clamp(140px, 12vw, 170px);
+  grid-template-columns: repeat(2, var(--compact-swatch-size));
+  max-width: 100%;
+  justify-content: start;
+}
+
 .work-item[data-project="safepoint"] .work-item__palette-grid {
   --safe-swatch-size: clamp(110px, 12vw, 170px);
   max-width: 100%;
@@ -1834,11 +1857,11 @@ body.work-focus .work-item:not(.is-open) {
 }
 
 .work-item__palette-square--p3-white {
-  background: var(--p3-white);
+  background: var(--p3-white, #ffffff);
 }
 
 .work-item__palette-square--p3-black {
-  background: var(--p3-black);
+  background: var(--p3-black, #000000);
   border-color: rgba(255, 255, 255, 0.72);
 }
 
@@ -1892,6 +1915,12 @@ body.work-focus .work-item:not(.is-open) {
 .work-item__type-alphabet--lower {
   text-transform: lowercase;
   color: #fff;
+}
+
+.work-item__type-specimen--animated-poem .work-item__type-alphabet {
+  font-family: "Another Typewriter", "Courier New", monospace;
+  font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 .work-item__type-specimen--p3 {
