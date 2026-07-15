@@ -1791,10 +1791,6 @@ body.work-focus .work-item:not(.is-open) {
   --safe-ink: #30331d;
 }
 
-.work-item[data-project="beyond-earth"] {
-  grid-column: 1 / -1;
-}
-
 .work-item__brand-stack {
   display: grid;
   gap: clamp(22px, 3vw, 32px);
