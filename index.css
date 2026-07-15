@@ -1583,6 +1583,11 @@ body.work-focus .work-item:not(.is-open) {
   color: var(--ink-soft);
 }
 
+.work-item__meta--stacked {
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
 .work-item__tools {
   display: none;
   margin: 0 0 -8px;

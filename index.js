@@ -1860,7 +1860,7 @@ const translations = {
     "work.meta.blender": "3D animation · 2025",
     "work.meta.musicvideo": "mobile app design · 2026",
     "work.meta.safepoint": "mobile app design · 2026",
-    "work.meta.beyondearth": "interactive web experience · 2026",
+    "work.meta.beyondearth": "interactive web experience\n2026",
     "work.desc.tmd":
       "EatEasy is a web platform for discovering and booking restaurants. The project allows users to search for restaurants, view details, choose a date and time, and make online reservations. It also includes an administration area for managing restaurants and bookings. It was developed in PHP with a PostgreSQL database, combining dynamic functionality with a warm and intuitive visual interface.",
     "work.tmd.palette": "Color palette",
@@ -2017,7 +2017,7 @@ const translations = {
     "work.meta.blender": "Animação 3D · 2025",
     "work.meta.musicvideo": "design de aplicação móvel · 2026",
     "work.meta.safepoint": "design de aplicação móvel · 2026",
-    "work.meta.beyondearth": "experiência web interativa · 2026",
+    "work.meta.beyondearth": "experiência web interativa\n2026",
     "work.desc.tmd":
       "EatEasy é uma plataforma web para descoberta e reserva de restaurantes. O projeto permite pesquisar restaurantes, consultar detalhes, escolher data e hora, e realizar reservas online. Inclui ainda uma área de administração para gestão de restaurantes e reservas. Foi desenvolvido em PHP com base de dados PostgreSQL, combinando funcionalidades dinâmicas com uma interface visual acolhedora e intuitiva.",
     "work.tmd.palette": "Paleta de cores",
